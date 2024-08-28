@@ -1,7 +1,6 @@
 {
   "name": "react-ui",
   "private": true,
-  "homepage": "https://d4t06.github.io/react-ui",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
