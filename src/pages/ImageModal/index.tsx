@@ -37,7 +37,7 @@ export default function ImageModal() {
    return (
       <>
          <img
-            className={"select-none touch-none cursor-zoom-in"}
+            className={"select-none touch-none cursor-zoom-in max-w-[40vw]"}
             onClick={handleImageClick}
             onTouchEnd={handleTouchEnd}
             onTouchMove={handleTouchMove}
