@@ -10,8 +10,8 @@ type Props = {
 };
 
 const ZOOM_FACTOR = 3;
-const MAG_HEIGHT = 3 / 5;
-const MAG_WIDTH = 3 / 5;
+// const MAG_HEIGHT = 3 / 5;
+// const MAG_WIDTH = 3 / 5;
 const SPACER = 20;
 
 export default function useMagnifier({ magnifierRef }: Props) {
@@ -87,9 +87,17 @@ export default function useMagnifier({ magnifierRef }: Props) {
       if (!imageEle) return;
 
       magnifierEle.style.width =
-         (imageEle.clientWidth * MAG_WIDTH).toFixed(0) + "px";
+         imageEle.width * ZOOM_FACTOR >= 0.4 * window.innerWidth
+            ? "40vw"
+            : // (imageEle.clientWidth * MAG_WIDTH).toFixed(0) + "px";
+              imageEle.width * ZOOM_FACTOR + "px";
+
       magnifierEle.style.height =
-         (imageEle.clientHeight * MAG_HEIGHT).toFixed(0) + "px";
+         imageEle.height * ZOOM_FACTOR >= 0.4 * window.innerWidth
+            ? "40vh"
+            : // (imageEle.clientHeight * MAG_HEIGHT).toFixed(0) + "px";
+              imageEle.height * ZOOM_FACTOR + "px";
+
       magnifierEle.style.display = "block";
       magnifierEle.style.backgroundImage = `url(${imageEle.src})`;
       magnifierEle.style.backgroundSize = `

@@ -42,7 +42,7 @@ export default function ImageModal() {
             onTouchEnd={handleTouchEnd}
             onTouchMove={handleTouchMove}
             {...attrs}
-            src="https://res.cloudinary.com/dalg3ayqh/image/upload/v1720193214/mobile-wars/eaywqttlk5pzmdckvy4f.jpg"
+            src="https://res.cloudinary.com/dalg3ayqh/image/upload/v1719805718/mobile-wars/lzo1ywoebhedoxfogbc7.jpg"
             alt=""
          />
 
