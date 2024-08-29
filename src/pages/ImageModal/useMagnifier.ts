@@ -13,10 +13,6 @@ const ZOOM_FACTOR = 3;
 const MAG_HEIGHT = 3 / 5;
 const MAG_WIDTH = 3 / 5;
 const SPACER = 20;
-const MAG_IMAGE_PADDING = {
-   right: 1,
-   bottom: 1,
-};
 
 export default function useMagnifier({ magnifierRef }: Props) {
    const update = (e: MouseEvent) => {
@@ -29,7 +25,7 @@ export default function useMagnifier({ magnifierRef }: Props) {
       const mousePosInImage = { x: 0, y: 0 };
       const newBgPosCssProp = { x: "0px", y: "0px" };
       const newMagPos = {
-         x: e.clientX + SPACER,
+         x: e.clientX - (magnifierEle.clientWidth + SPACER),
          y: e.clientY + SPACER,
       };
 
@@ -37,45 +33,42 @@ export default function useMagnifier({ magnifierRef }: Props) {
       mousePosInImage.y = e.clientY - imageRect.top;
 
       // because the image in mag bigger ZOOM_FACTOR times
-      // we want to display image
+      // magnifierEle.clientWidth / 2 -> move the zoom area center the pointer
       const newBgPosX =
-         mousePosInImage.x * ZOOM_FACTOR - magnifierEle.clientWidth;
+         mousePosInImage.x * ZOOM_FACTOR - magnifierEle.clientWidth / 2;
+
+      const newBgPosY =
+         mousePosInImage.y * ZOOM_FACTOR - magnifierEle.clientHeight / 2;
 
       newBgPosCssProp.x = `-${newBgPosX}px`;
-
-      const newBgPosY = mousePosInImage.y * ZOOM_FACTOR;
-
       newBgPosCssProp.y = `-${newBgPosY}px`;
-
-      const imageSizeAppliedZoomFactor = {
-         width: +(magnifierEle.clientWidth / ZOOM_FACTOR).toFixed(0),
-         height: +(magnifierEle.clientHeight / ZOOM_FACTOR).toFixed(0),
-      };
 
       if (newBgPosX < 0) newBgPosCssProp.x = "0px"; // near left
       if (newBgPosY < 0) newBgPosCssProp.y = "0px"; // near top
 
-      const imageWidthRest = imageEle.clientWidth - mousePosInImage.x;
-
       // near right
-      // this if statement make sure that mag alway contain image
-      if (imageWidthRest * ZOOM_FACTOR < magnifierEle.clientWidth) {
+      // imageWidthRest * ZOOM_FACTOR -> actually size
+      // magnifierEle.clientWidth / 2
+      // -> because we had move the zoom area to the center of pointer
+      const imageWidthRest = imageEle.clientWidth - mousePosInImage.x;
+      if (
+         imageWidthRest * ZOOM_FACTOR + magnifierEle.clientWidth / 2 <
+         magnifierEle.clientWidth
+      ) {
          newBgPosCssProp.x = "100%";
       }
 
-      const imageHeightRest = imageEle.clientHeight - mousePosInImage.y;
-
       // near bottom
+      const imageHeightRest = imageEle.clientHeight - mousePosInImage.y;
       if (
-         imageHeightRest +
-            imageSizeAppliedZoomFactor.height * MAG_IMAGE_PADDING.bottom <
-         imageSizeAppliedZoomFactor.height
+         imageHeightRest * ZOOM_FACTOR + magnifierEle.clientHeight / 2 <
+         magnifierEle.clientHeight
       ) {
          newBgPosCssProp.y = "100%";
       }
 
-      if (e.clientX + magnifierEle.clientWidth + SPACER > window.innerWidth)
-         newMagPos.x = newMagPos.x - (magnifierEle.clientWidth + 2 * SPACER);
+      if (magnifierEle.clientWidth + SPACER > e.clientX)
+         newMagPos.x = newMagPos.x + (magnifierEle.clientWidth + 2 * SPACER);
 
       if (e.clientY + magnifierEle.clientHeight + SPACER > window.innerHeight)
          newMagPos.y = newMagPos.y - (magnifierEle.clientHeight + 2 * SPACER);
