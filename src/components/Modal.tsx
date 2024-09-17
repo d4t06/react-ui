@@ -1,4 +1,3 @@
-
 import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 
@@ -9,7 +8,12 @@ type Props = {
    childClassName?: string;
 };
 
-function Modal({ children, closeModal, className = "z-[99]", childClassName }: Props) {
+function Modal({
+   children,
+   closeModal,
+   className = "z-[99]",
+   childClassName,
+}: Props) {
    return (
       <>
          {createPortal(
