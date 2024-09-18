@@ -2,6 +2,7 @@ import Button from "@/components/Button";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import MyPopup, { MyPopupContent, MyPopupTrigger, TriggerRef } from "./popup";
 import { useRef } from "react";
+import ToolTip from "./ToolTip";
 
 export default function PopupPage() {
    const triggerRef = useRef<TriggerRef>(null);
@@ -14,9 +15,11 @@ export default function PopupPage() {
 
          <MyPopup>
             <MyPopupTrigger ref={triggerRef}>
-               <Button>
-                  <Cog6ToothIcon className="w-6" />
-               </Button>
+               <ToolTip  content="this is a tooltip" className="bg-slate-700 text-white p-2 text-sm font-[500]">
+                  <Button>
+                     <Cog6ToothIcon className="w-6" />
+                  </Button>
+               </ToolTip>
             </MyPopupTrigger>
 
             <MyPopupContent
@@ -30,6 +33,10 @@ export default function PopupPage() {
                </div>
             </MyPopupContent>
          </MyPopup>
+
+         <ToolTip  content="this is a tooltip 2">
+            <Button>Hover me</Button>
+         </ToolTip>
       </div>
    );
 }
