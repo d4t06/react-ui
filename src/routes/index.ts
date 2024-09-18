@@ -2,6 +2,7 @@ import ButtonPage from "@/pages/ButtonPage";
 import ImageModal from "@/pages/ImageModal";
 import AnimationRendering from "@/pages/animationRendering";
 import Gallery from "@/pages/gallery";
+import PopupPage from "@/pages/popup";
 import ScrollTexPage from "@/pages/scrollText";
 
 const publicRoutes = [
@@ -29,6 +30,11 @@ const publicRoutes = [
       path: "/animation-rendering",
       component: AnimationRendering,
       title: "Animation",
+   },
+   {
+      path: "/popup",
+      component: PopupPage,
+      title: "Popup",
    },
 ];
 
