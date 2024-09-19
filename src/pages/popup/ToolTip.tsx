@@ -11,6 +11,12 @@ import {
    useState,
 } from "react";
 
+type PropsFromPopup = {
+   isOpen?: boolean;
+   setTriggerRef?: (ele: ElementRef<"button">) => void;
+   onClick?: () => void;
+};
+
 type Props = {
    children: ReactNode;
    className?: string;
@@ -25,16 +31,17 @@ function ToolTip(
       children,
       className = "bg-slate-700 text-white p-2 text-sm font-[500]",
       position = "bottom-[calc(100%+8px)]",
-      isOpen = false,
       isWrapped = false,
       content,
       ...rest
    }: Props,
-   _ref: Ref<any>
+   _ref: Ref<ElementRef<"button">> // use set trigger ref instead
 ) {
    const [open, setOpen] = useState(false);
 
    const cloneEleRef = useRef<ElementRef<"button">>(null);
+
+   const { isOpen, setTriggerRef, onClick } = rest as PropsFromPopup;
 
    const handleMouseEnter: EventListener = () => {
       setOpen(true);
@@ -46,8 +53,11 @@ function ToolTip(
 
    useEffect(() => {
       const cloneEle = cloneEleRef.current as HTMLButtonElement;
-
       if (!cloneEle) return;
+
+      if (setTriggerRef) {
+         setTriggerRef(cloneEle);
+      }
 
       cloneEle.addEventListener("mouseenter", handleMouseEnter);
       cloneEle.addEventListener("mouseleave", handleMouseLeave);
@@ -62,10 +72,14 @@ function ToolTip(
       <>
          {isValidElement(children) && (
             <>
-               {cloneElement(children, {
-                  ref: cloneEleRef,
-                  ...rest,
-               } as HTMLProps<HTMLButtonElement>)}
+               {!!Object.keys(rest).length
+                  ? cloneElement(children, {
+                       ref: cloneEleRef,
+                       onClick,
+                    } as HTMLProps<HTMLButtonElement>)
+                  : cloneElement(children, {
+                       ref: cloneEleRef,
+                    } as HTMLProps<HTMLButtonElement>)}
 
                {!isOpen && open && (
                   <div

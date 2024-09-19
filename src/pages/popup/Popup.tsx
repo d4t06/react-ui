@@ -51,13 +51,14 @@ const usePopup = ({ appendOnPortal }: PopupProps) => {
    };
 
    return {
-      refs: { triggerRef, contentRef, setTriggerRef, setContentRef },
+      refs: { triggerRef, contentRef, setContentRef },
       state: { isMounted, isOpen } as StateType,
       setIsMounted,
       setIsOpen,
       appendOnPortal,
       close,
       toggle,
+      setTriggerRef,
    };
 };
 
@@ -107,6 +108,7 @@ export const MyPopupTrigger = forwardRef(function (
       setIsOpen,
       close,
       toggle,
+      setTriggerRef,
       state: { isMounted, isOpen },
    } = usePopoverContext();
 
@@ -161,9 +163,10 @@ export const MyPopupTrigger = forwardRef(function (
 
    if (isValidElement(children)) {
       return cloneElement(children, {
-         ref: refs.setTriggerRef,
          onClick: toggle,
-         isOpen: isOpen,
+         isOpen,
+         setTriggerRef,
+         ref: refs.triggerRef,
       } as HTMLProps<Element>);
    }
 
@@ -227,7 +230,12 @@ export function MyPopupContent({
    };
 
    const content = (
-      <div ref={refs.setContentRef} className={`absolute ${className || ""}`}>
+      <div
+         ref={refs.setContentRef}
+         className={`${appendOnPortal ? "fixed" : "absolute"} z-[99] ${
+            className || ""
+         }`}
+      >
          <div
             ref={animationRef}
             className={` transition-[transform,opacity] duration-[.25s] ease-linear ${
