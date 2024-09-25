@@ -1,3 +1,4 @@
+import BrowserBackground from "@/pages/BrowserBackground";
 import ButtonPage from "@/pages/ButtonPage";
 import ImageModal from "@/pages/ImageModal";
 import AnimationRendering from "@/pages/animationRendering";
@@ -35,6 +36,11 @@ const publicRoutes = [
       path: "/popup",
       component: PopupPage,
       title: "Popup",
+   },
+   {
+      path: "/browser-background",
+      component: BrowserBackground,
+      title: "Browser Bg",
    },
 ];
 
