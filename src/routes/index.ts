@@ -4,6 +4,7 @@ import AnimationRendering from "@/pages/animationRendering";
 import Gallery from "@/pages/gallery";
 import PopupPage from "@/pages/popup";
 import ScrollTexPage from "@/pages/scrollText";
+import AudioPlayer from "@/pages/audioPlayer";
 
 const publicRoutes = [
    {
@@ -35,6 +36,12 @@ const publicRoutes = [
       path: "/popup",
       component: PopupPage,
       title: "Popup",
+   },
+
+   {
+      path: "/music-player",
+      component: AudioPlayer,
+      title: "Music Player",
    },
 ];
 

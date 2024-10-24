@@ -21,27 +21,23 @@ type Props = {
    children: ReactNode;
    className?: string;
    position?: string;
-   isOpen?: boolean;
    isWrapped?: boolean;
    content: string;
 };
 
-function ToolTip(
-   {
-      children,
-      className = "bg-slate-700 text-white p-2 text-sm font-[500]",
-      position = "bottom-[calc(100%+8px)]",
-      isWrapped = false,
-      content,
-      ...rest
-   }: Props,
-   _ref: Ref<ElementRef<"button">> // use set trigger ref instead
-) {
+function MyToolTip({
+   children,
+   className = "px-2 py-1 text-sm font-[600]",
+   position = "bottom-[calc(100%+8px)]",
+   content,
+   isWrapped,
+   ...rest
+}: Props, _ref: Ref<any>) {
    const [open, setOpen] = useState(false);
 
-   const cloneEleRef = useRef<ElementRef<"button">>(null);
-
    const { isOpen, setTriggerRef, onClick } = rest as PropsFromPopup;
+
+   const cloneEleRef = useRef<ElementRef<"button">>(null);
 
    const handleMouseEnter: EventListener = () => {
       setOpen(true);
@@ -53,6 +49,7 @@ function ToolTip(
 
    useEffect(() => {
       const cloneEle = cloneEleRef.current as HTMLButtonElement;
+
       if (!cloneEle) return;
 
       if (setTriggerRef) {
@@ -67,6 +64,10 @@ function ToolTip(
          cloneEle.removeEventListener("mouseleave", handleMouseLeave);
       };
    }, []);
+
+   const classes = {
+      container: `bg-slate-700 text-white`,
+   };
 
    const jsxContent = (
       <>
@@ -83,7 +84,7 @@ function ToolTip(
 
                {!isOpen && open && (
                   <div
-                     className={`absolute whitespace-nowrap -translate-x-1/2 left-1/2 rounded-md ${position} ${className}`}
+                     className={`${classes.container} absolute whitespace-nowrap -translate-x-1/2 left-1/2 rounded-md ${position} ${className}`}
                   >
                      {content}
                   </div>
@@ -105,4 +106,4 @@ function ToolTip(
       );
 }
 
-export default forwardRef(ToolTip);
+export default forwardRef(MyToolTip);

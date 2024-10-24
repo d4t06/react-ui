@@ -27,6 +27,7 @@ export default function PopupPage() {
                </MyPopupTrigger>
 
                <MyPopupContent
+                  appendTo="portal"
                   className="top-[calc(100%+8px)]"
                   animationClassName="origin-top-left"
                >
@@ -51,8 +52,10 @@ export default function PopupPage() {
                </MyPopupTrigger>
 
                <MyPopupContent
-                  className="top-[calc(100%+8px)]"
-                  animationClassName="origin-top-left"
+                  appendTo="portal"
+
+                  // className="top-[calc(100%+8px)]"
+                  // animationClassName="origin-top-left"
                >
                   <div className={classes.popupContainer}>
                      <div>Setting 1</div>
@@ -71,8 +74,9 @@ export default function PopupPage() {
                </MyPopupTrigger>
 
                <MyPopupContent
-                  className="top-[calc(100%+8px)]"
-                  animationClassName="origin-top-left"
+                  appendTo="portal"
+                  // className="top-[calc(100%+8px)]"
+                  // animationClassName="origin-top-left"
                >
                   <div className={classes.popupContainer}>
                      <div>Setting 1</div>
@@ -89,6 +93,7 @@ export default function PopupPage() {
                </MyPopupTrigger>
 
                <MyPopupContent
+                  appendTo="portal"
                   className="top-[calc(100%+8px)]"
                   animationClassName="origin-top-left"
                >

@@ -1,4 +1,4 @@
-import { ArrowPathIcon } from "@heroicons/react/16/solid";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { VariantProps, cva } from "class-variance-authority";
 import { ElementRef, forwardRef, ReactNode, Ref } from "react";
 import { Link } from "react-router-dom";
@@ -25,6 +25,7 @@ const ButtonVariant = cva(classes.button, {
          second:
             "before:border-[#ccc] text-[#333] bg-[#f6f6f6] before:shadow-[0_2px_0_#ccc]",
          third: "before:border-[#a00000] bg-[#fff] text-[#000] before:shadow-[0_2px_0_#a00000]",
+         four: "text-amber-100 before:bg-amber-800 before:border-[#78350f] before:shadow-[0_2px_0_#78350f]" ,
          clear: "",
       },
       border: {
