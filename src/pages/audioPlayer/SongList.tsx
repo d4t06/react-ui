@@ -23,7 +23,7 @@ export default function SongList({ songs, back, tab }: Props) {
          ref={songListContainer}
          className="max-h-[40vh] overflow-auto no-scrollbar"
       >
-         {songs.map((s, i) => (
+         {!!songs.length ? songs.map((s, i) => (
             <SongItem
                active={currentIndex === i}
                setCurrentSong={setCurrentSong}
@@ -31,7 +31,7 @@ export default function SongList({ songs, back, tab }: Props) {
                song={s}
                index={i}
             />
-         ))}
+         )) : "No song jet..."}
       </div>
    );
 }

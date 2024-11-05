@@ -12,6 +12,7 @@ import Button from "@/components/Button";
 import { usePlayerContext } from "./PlayerContext";
 import SongList from "./SongList";
 import useGetSongs from "./useGetSongs";
+import TimerButton from "./TimerButton";
 
 type Props = {
    audioEle: HTMLAudioElement;
@@ -29,15 +30,16 @@ export default function Player({ audioEle }: Props) {
    const currentTimeRef = useRef<ElementRef<"div">>(null);
 
    const { isFetching } = useGetSongs();
-   const { handlePlayPause, handleSeek, handleNext, handlePrevious, status } =
-      usePlayer({
-         currentTimeRef,
-         processLineRef,
-         timeHolderRef,
-         audioEle,
-      });
+   const { handlePlayPause, handleSeek, handleNext, handlePrevious, status } = usePlayer({
+      currentTimeRef,
+      processLineRef,
+      timeHolderRef,
+      audioEle,
+   });
 
    const _handlePlayPause = () => {
+      if (!songs.length) return;
+
       if (currentSongRef.current === null)
          setCurrentSong(Math.round(Math.random() * songs.length - 1));
       else handlePlayPause();
@@ -60,7 +62,7 @@ export default function Player({ audioEle }: Props) {
       timeLineRef: `relative group h-full sm:h-1 hover:h-full  w-full rounded-full bg-[#fff]/30 before:content-[''] before:w-[100%] before:h-[16px] before:absolute before:top-[50%] before:translate-y-[-50%]`,
       timeLineHolderRef:
          "absolute pointer-events-none h-6 w-3 rounded-sm bg-amber-900 border-[2px] border-amber-200 top-1/2 -translate-y-1/2 -translate-x-1/2",
-      toggleButton: "queue-btn p-2 ",
+      toggleButton: "queue-btn px-2",
    };
 
    const handleShowHide = (active: boolean) => {
@@ -103,14 +105,10 @@ export default function Player({ audioEle }: Props) {
 
                   <div className="flex justify-between items-center h-[30px]">
                      <div ref={currentTimeRef}>0:00</div>
-                     <div>
-                        {formatTime(currentSongRef.current?.duration || 0)}
-                     </div>
+                     <div>{formatTime(currentSongRef.current?.duration || 0)}</div>
                   </div>
 
-                  <div
-                     className={`flex my-2 justify-center items-center space-x-3 `}
-                  >
+                  <div className={`flex my-2 justify-center items-center space-x-3 `}>
                      <Button
                         disabled={!songs.length}
                         colors={"four"}
@@ -134,26 +132,27 @@ export default function Player({ audioEle }: Props) {
                </div>
 
                <div className={`${handleShowHide(tab === "queue")} `}>
-                  <SongList
-                     tab={tab}
-                     back={() => setTab("playing")}
-                     songs={songs}
-                  />
+                  <SongList tab={tab} back={() => setTab("playing")} songs={songs} />
                </div>
             </div>
          </div>
 
-         <div className="absolute bottom-8 right-8 flex space-x-2">
+         <div className="absolute h-10 bottom-8 right-8 flex space-x-2">
             <Button
                className={classes.toggleButton}
                size={"clear"}
                colors={"four"}
-               onClick={() =>
-                  tab === "playing" ? setTab("queue") : setTab("playing")
-               }
+               onClick={() => (tab === "playing" ? setTab("queue") : setTab("playing"))}
             >
                <QueueListIcon className="w-6" />
             </Button>
+
+            <TimerButton
+               disbale={!songs.length}
+               audioEle={audioEle}
+               isPlaying={status === "playing"}
+               play={_handlePlayPause}
+            />
          </div>
       </>
    );
