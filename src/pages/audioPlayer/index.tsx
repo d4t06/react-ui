@@ -13,8 +13,10 @@ export default function AudioPlayer() {
 
    return (
       <PlayerProvider>
-         <audio ref={audioRef}  className="hidden"></audio>
-         {audioRef.current && <Player audioEle={audioRef.current} />}
+         <div className="absolute inset-0 translate-x-0 z-[99]">
+            <audio ref={audioRef} className="hidden"></audio>
+            {audioRef.current && <Player audioEle={audioRef.current} />}
+         </div>
       </PlayerProvider>
    );
 }

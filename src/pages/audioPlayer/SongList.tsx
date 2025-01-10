@@ -1,4 +1,3 @@
-import { ElementRef, useRef } from "react";
 import { usePlayerContext } from "./PlayerContext";
 import SongItem from "./SongItem";
 import { Song } from "./types";
@@ -14,15 +13,10 @@ type Props = {
 export default function SongList({ songs, back, tab }: Props) {
    const { setCurrentSong, currentIndex } = usePlayerContext();
 
-   const songListContainer = useRef<ElementRef<"div">>(null);
-
-   useSongListEvent({ back, tab, songListContainer });
+   useSongListEvent({ back, tab });
 
    return (
-      <div
-         ref={songListContainer}
-         className="max-h-[40vh] overflow-auto no-scrollbar"
-      >
+      <div className="max-h-[40vh] overflow-auto no-scrollbar">
          {songs.map((s, i) => (
             <SongItem
                active={currentIndex === i}

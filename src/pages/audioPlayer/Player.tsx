@@ -6,7 +6,6 @@ import {
    ForwardIcon,
    PauseIcon,
    PlayIcon,
-   QueueListIcon,
 } from "@heroicons/react/24/outline";
 import Button from "@/components/Button";
 import { usePlayerContext } from "./PlayerContext";
@@ -72,10 +71,13 @@ export default function Player({ audioEle }: Props) {
 
    return (
       <>
-         <div className="w-[400px] max-w-[75vw] ">
+         <div className="player w-[400px] max-w-[75vw] absolute bottom-0 translate-y-[-100px]">
             <div className="p-3 bg-amber-800 text-amber-100 rounded-[16px] border-[4px] border-amber-900 border-b-[8px]">
                <div className={` ${handleShowHide(tab === "playing")} `}>
-                  <div className="text-center">
+                  <div
+                     className="text-center cursor-pointer"
+                     onClick={() => setTab("queue")}
+                  >
                      <p className="font-bold text-2xl line-clamp-1">
                         {currentSongRef.current?.name || "..."}
                      </p>
@@ -143,7 +145,7 @@ export default function Player({ audioEle }: Props) {
             </div>
          </div>
 
-         <div className="absolute bottom-8 right-8 flex space-x-2">
+         {/* <div className="absolute bottom-8 right-8 flex space-x-2">
             <Button
                className={classes.toggleButton}
                size={"clear"}
@@ -154,7 +156,7 @@ export default function Player({ audioEle }: Props) {
             >
                <QueueListIcon className="w-6" />
             </Button>
-         </div>
+         </div> */}
       </>
    );
 }

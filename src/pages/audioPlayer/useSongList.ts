@@ -1,16 +1,11 @@
-import { RefObject, useEffect } from "react";
+import { useEffect } from "react";
 
 type Props = {
    tab: "playing" | "queue";
    back: () => void;
-   songListContainer: RefObject<HTMLDivElement>;
 };
 
-export default function useSongListEvent({
-   tab,
-   back,
-   songListContainer,
-}: Props) {
+export default function useSongListEvent({ tab, back }: Props) {
    const scroll = (el: Element) => {
       el.scrollIntoView({
          behavior: "instant",
@@ -22,11 +17,12 @@ export default function useSongListEvent({
       const $ = document.querySelector.bind(document);
 
       const buttons = [$(".queue-btn")];
+      const player = $(".player");
       const target = e.target as Node;
 
       if (
-         !songListContainer ||
-         songListContainer.current?.contains(target) ||
+         !player ||
+         player?.contains(target) ||
          !!buttons.find((btn) => btn?.contains(target))
       )
          return;
