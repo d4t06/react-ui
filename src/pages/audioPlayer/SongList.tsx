@@ -17,15 +17,17 @@ export default function SongList({ songs, back, tab }: Props) {
 
    return (
       <div className="max-h-[40vh] overflow-auto no-scrollbar">
-         {songs.map((s, i) => (
-            <SongItem
-               active={currentIndex === i}
-               setCurrentSong={setCurrentSong}
-               key={i}
-               song={s}
-               index={i}
-            />
-         ))}
+         {!!songs.length
+            ? songs.map((s, i) => (
+                 <SongItem
+                    active={currentIndex === i}
+                    setCurrentSong={setCurrentSong}
+                    key={i}
+                    song={s}
+                    index={i}
+                 />
+              ))
+            : "No song jet..."}
       </div>
    );
 }

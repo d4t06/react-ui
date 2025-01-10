@@ -6,6 +6,7 @@ import Gallery from "@/pages/gallery";
 import PopupPage from "@/pages/popup";
 import ScrollTexPage from "@/pages/scrollText";
 import AudioPlayer from "@/pages/audioPlayer";
+import Tet from "@/pages/tet";
 
 const publicRoutes = [
    {
@@ -48,6 +49,11 @@ const publicRoutes = [
       path: "/browser-background",
       component: BrowserBackground,
       title: "Browser Bg",
+   },
+   {
+      path: "/tet",
+      component: Tet,
+      title: "Tet",
    },
 ];
 

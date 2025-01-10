@@ -13,6 +13,8 @@ type Props = {
 };
 export type ModalRef = {
    toggle: () => void;
+   open: () => void;
+   close: () => void;
 };
 function Modal2({ children }: Props, ref: Ref<ModalRef>) {
    const [isOpen, setIsOpen] = useState(false);
@@ -23,8 +25,18 @@ function Modal2({ children }: Props, ref: Ref<ModalRef>) {
       if (!isOpen) setIsOpen(true);
    };
 
+   const open = () => {
+      setIsOpen(true);
+   };
+
+   const close = () => {
+      setIsMounted(false);
+   };
+
    useImperativeHandle(ref, () => ({
       toggle,
+      open,
+      close,
    }));
 
    useEffect(() => {
@@ -42,9 +54,9 @@ function Modal2({ children }: Props, ref: Ref<ModalRef>) {
    }, [isOpen]);
 
    const classes = {
-      unMountedContent: "opacity-[.6] scale-[.6]",
+      unMountedContent: "opacity-0 scale-[0.6]",
       mountedContent: "opacity-100 scale-[1]",
-      unMountedLayer: "opacity-[.8]",
+      unMountedLayer: "opacity-0",
       mountedLayer: "opacity-100",
    };
 
@@ -54,7 +66,7 @@ function Modal2({ children }: Props, ref: Ref<ModalRef>) {
             createPortal(
                <>
                   <div
-                     className={`fixed transition-opacity ease-linear duration-200 inset-0 bg-black/60
+                     className={`fixed transition-opacity ease-linear duration-200 inset-0 bg-black opacity-60
                                  ${
                                     isMounted
                                        ? classes.mountedLayer
@@ -73,7 +85,7 @@ function Modal2({ children }: Props, ref: Ref<ModalRef>) {
                                     }
                                  `}
                      >
-                        <div className="bg-white">{children}</div>
+                        {children}
                      </div>
                   )}
                </>,
