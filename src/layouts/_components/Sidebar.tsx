@@ -12,7 +12,7 @@ export default function DashBoardSidebar() {
 
    const classes = {
       container:
-         "bg-[#fff] border-r border-black/15 transition-[width] max-h-[100vh] relative flex-shrink-0 w-[50px] sm:w-[70px]",
+         "bg-[#fff] border-r border-black/15 transition-[width] h-ful flex flex-col relative flex-shrink-0 w-[50px] sm:w-[70px]",
       containerExpand: "!w-[180px]",
       head: "h-[60px] flex items-center justify-center",
       logoText: "text-[22px] font-[500] whitespace-nowrap tracking-[-1px]",
@@ -35,29 +35,33 @@ export default function DashBoardSidebar() {
                </h1>
             )}
          </div>
-         <div>
-            <Link
-               to="/"
-               className={`${classes.item} ${expand ? "!justify-start" : ""}
+
+         <div className="overflow-auto h-full pb-10">
+            <div>
+               <Link
+                  to="/"
+                  className={`${classes.item} ${expand ? "!justify-start" : ""}
                ${pathName === "/" ? classes.itemActive : ""}
                `}
-            >
-               <HomeIcon className={classes.icon} />
-               {expand && <span>Home</span>}
-            </Link>
-
-            {publicRoutes.map((r, index) => (
-               <Link
-                  key={index}
-                  className={`${classes.item} ${expand ? "!justify-start" : ""}
-                  ${pathName === r.path ? classes.itemActive : ""}`}
-                  to={r.path}
                >
-                  <AtSymbolIcon className={classes.icon} />
-                  {expand && <span>{r.title}</span>}
+                  <HomeIcon className={classes.icon} />
+                  {expand && <span>Home</span>}
                </Link>
-            ))}
+
+               {publicRoutes.map((r, index) => (
+                  <Link
+                     key={index}
+                     className={`${classes.item} ${expand ? "!justify-start" : ""}
+                  ${pathName === r.path ? classes.itemActive : ""}`}
+                     to={r.path}
+                  >
+                     <AtSymbolIcon className={classes.icon} />
+                     {expand && <span>{r.title}</span>}
+                  </Link>
+               ))}
+            </div>
          </div>
+
          <div className="!absolute bottom-[20px] right-0 translate-x-[50%] z-[10]">
             <Button
                onClick={() => setExpand((prev) => !prev)}

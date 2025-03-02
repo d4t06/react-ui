@@ -7,6 +7,7 @@ import PopupPage from "@/pages/popup";
 import ScrollTexPage from "@/pages/scrollText";
 import AudioPlayer from "@/pages/audioPlayer";
 import Tet from "@/pages/tet";
+import GeneratePdfPage from "@/pages/generatePdf";
 
 const publicRoutes = [
    {
@@ -54,6 +55,11 @@ const publicRoutes = [
       path: "/tet",
       component: Tet,
       title: "Tet",
+   },
+   {
+      path: "/pdf",
+      component: GeneratePdfPage,
+      title: "Generate Pdf",
    },
 ];
 

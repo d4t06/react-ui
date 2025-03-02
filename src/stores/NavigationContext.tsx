@@ -1,11 +1,9 @@
 import { ReactNode, createContext, useContext, useState } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 
 const useNavigation = () => {
 	const [ahead, setAhead] = useState<string[]>([]);
 	const [behind, setBehind] = useState<string[]>([]);
-
-	const navigator = useNavigate();
 
 	const backward = () => {
 		setBehind((prev) => {
