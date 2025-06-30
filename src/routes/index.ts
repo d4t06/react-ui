@@ -8,6 +8,7 @@ import ScrollTexPage from "@/pages/scrollText";
 import AudioPlayer from "@/pages/audioPlayer";
 import Tet from "@/pages/tet";
 import GeneratePdfPage from "@/pages/generatePdf";
+import SliderPage from "@/pages/slider";
 
 const publicRoutes = [
    {
@@ -54,12 +55,17 @@ const publicRoutes = [
    {
       path: "/tet",
       component: Tet,
-      title: "Tet",
+      title: "Snow",
    },
    {
       path: "/pdf",
       component: GeneratePdfPage,
       title: "Generate Pdf",
+   },
+   {
+      path: "/slider",
+      component: SliderPage,
+      title: "Slider",
    },
 ];
 

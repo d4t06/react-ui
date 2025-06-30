@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { usePlayerContext } from "./PlayerContext";
 import { Song } from "./types";
-import { songs } from "./constant/songs";
 
 export default function useGetSongs() {
-   const [isFetching, setIsFetching] = useState(true);
+   const { setIsFetching } = usePlayerContext();
 
    const ranEffect = useRef(false);
 
@@ -12,17 +11,11 @@ export default function useGetSongs() {
 
    const api = async () => {
       try {
-         const isDev = import.meta.env.DEV;
+         const res = await fetch("https://nest-mp3-production.up.railway.app/api/songs");
 
-         if (isDev) {
-            setSongs(songs);
-         } else {
-            const res = await fetch("https://nest-mp3.vercel.app/api/songs");
-
-            if (res.ok) {
-               const payload = (await res.json()) as { data: { songs: Song[] } };
-               setSongs(payload.data.songs);
-            }
+         if (res.ok) {
+            const payload = (await res.json()) as { data: { songs: Song[] } };
+            setSongs(payload.data.songs);
          }
       } catch (error) {
          console.log({ message: error });
@@ -37,8 +30,4 @@ export default function useGetSongs() {
          api();
       }
    }, []);
-
-   return {
-      isFetching,
-   };
 }

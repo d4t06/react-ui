@@ -11,7 +11,6 @@ import {
 import Button from "@/components/Button";
 import { usePlayerContext } from "./PlayerContext";
 import SongList from "./SongList";
-import useGetSongs from "./useGetSongs";
 import TimerButton from "./TimerButton";
 
 type Props = {
@@ -21,7 +20,7 @@ type Props = {
 export type Tab = "playing" | "queue";
 
 export default function Player({ audioEle }: Props) {
-   const { currentSongRef, songs, setCurrentSong } = usePlayerContext();
+   const { currentSongRef, songs, setCurrentSong, isFetching } = usePlayerContext();
 
    const [tab, setTab] = useState<Tab>("playing");
 
@@ -29,7 +28,6 @@ export default function Player({ audioEle }: Props) {
    const timeHolderRef = useRef<ElementRef<"div">>(null);
    const currentTimeRef = useRef<ElementRef<"div">>(null);
 
-   const { isFetching } = useGetSongs();
    const { handlePlayPause, handleSeek, handleNext, handlePrevious, status } = usePlayer({
       currentTimeRef,
       processLineRef,

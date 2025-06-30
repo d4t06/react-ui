@@ -7,12 +7,22 @@ const usePlayer = () => {
    const currentSongRef = useRef<Song | null>(null);
    const [currentIndex, setCurrentIndex] = useState<number | null>(null);
 
+   const [isFetching, setIsFetching] = useState(true);
+
    const setCurrentSong = (index: number) => {
       setCurrentIndex(index);
       currentSongRef.current = songs[index];
    };
 
-   return { songs, currentSongRef, setCurrentSong, currentIndex, setSongs };
+   return {
+      songs,
+      isFetching,
+      setIsFetching,
+      currentSongRef,
+      setCurrentSong,
+      currentIndex,
+      setSongs,
+   };
 };
 
 type ContextType = ReturnType<typeof usePlayer>;

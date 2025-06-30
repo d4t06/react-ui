@@ -54,7 +54,7 @@ function Modal2({ children }: Props, ref: Ref<ModalRef>) {
    }, [isOpen]);
 
    const classes = {
-      unMountedContent: "opacity-0 scale-[0.6]",
+      unMountedContent: "opacity-0 scale-[0.9]",
       mountedContent: "opacity-100 scale-[1]",
       unMountedLayer: "opacity-0",
       mountedLayer: "opacity-100",

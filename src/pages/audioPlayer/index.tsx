@@ -1,22 +1,25 @@
-import { ElementRef, useEffect, useRef, useState } from "react";
+import { ElementRef, useRef } from "react";
 import Player from "./Player";
 import PlayerProvider from "./PlayerContext";
+import useGetSongs from "./useGetSongs";
 
-export default function AudioPlayer() {
-   const [_hadAudio, setHadAudio] = useState(false);
-
+function Content() {
    const audioRef = useRef<ElementRef<"audio">>(null);
 
-   useEffect(() => {
-      setHadAudio(true);
-   }, []);
+   useGetSongs();
 
    return (
+      <>
+         <audio ref={audioRef} className="hidden"></audio>
+         {audioRef.current && <Player audioEle={audioRef.current} />}
+      </>
+   );
+}
+
+export default function AudioPlayer() {
+   return (
       <PlayerProvider>
-         <div className="absolute inset-0 translate-x-0 z-[99]">
-            <audio ref={audioRef} className="hidden"></audio>
-            {audioRef.current && <Player audioEle={audioRef.current} />}
-         </div>
+         <Content />
       </PlayerProvider>
    );
 }

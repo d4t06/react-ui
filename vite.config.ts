@@ -7,5 +7,8 @@ export default defineConfig({
    resolve: {
       alias: [{ find: "@", replacement: "/src" }],
    },
-   base: "react-ui",
+   server: {
+      port: 3000,
+   },
+   base: "/react-ui",
 });
