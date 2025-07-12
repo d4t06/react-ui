@@ -2,9 +2,13 @@ import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import { ArrowUpTrayIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
+import useReadCopiedImage from "./_hooks/useReadCopiedImage";
+import Image from "./_components/MyImage";
 
 export default function Gallery() {
    const [openModal, setOpenModal] = useState(false);
+
+   const { imageUrl } = useReadCopiedImage();
 
    const classes = {
       container: "w-[85vw] h-[80vh] flex flex-col",
@@ -20,6 +24,11 @@ export default function Gallery() {
    return (
       <>
          <input className="hidden" type="file" id="image-upload" />
+
+         {imageUrl && <Image className="w-[400px]" src={imageUrl} />}
+
+         <p>Past image here</p>
+
          <Button onClick={() => setOpenModal(true)}>Open</Button>
 
          {openModal && (

@@ -1,8 +1,6 @@
-"use client";
-
 import Button from "@/components/Button";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { useState, useEffect } from "react";
+import useSlider from "./useImageSlider";
 
 interface ImageSliderProps {
    images: string[];
@@ -15,50 +13,10 @@ export default function ImageSlider({
    autoPlay = false,
    className = "",
 }: ImageSliderProps) {
-   const [currentIndex, setCurrentIndex] = useState(0);
-
-   // Auto-play functionality
-   useEffect(() => {
-      if (!autoPlay || images.length <= 1) return;
-
-      const interval = setInterval(() => {
-         setCurrentIndex((prevIndex) =>
-            prevIndex === images.length - 1 ? 0 : prevIndex + 1,
-         );
-      }, 5000);
-
-      return () => clearInterval(interval);
-   }, [autoPlay, 5000, images.length]);
-
-   // Keyboard navigation
-   useEffect(() => {
-      const handleKeyDown = (event: KeyboardEvent) => {
-         if (event.key === "ArrowLeft") {
-            goToPrevious();
-         } else if (event.key === "ArrowRight") {
-            goToNext();
-         }
-      };
-
-      window.addEventListener("keydown", handleKeyDown);
-      return () => window.removeEventListener("keydown", handleKeyDown);
-   }, []);
-
-   const goToPrevious = () => {
-      setCurrentIndex((prevIndex) =>
-         prevIndex === 0 ? images.length - 1 : prevIndex - 1,
-      );
-   };
-
-   const goToNext = () => {
-      setCurrentIndex((prevIndex) =>
-         prevIndex === images.length - 1 ? 0 : prevIndex + 1,
-      );
-   };
-
-   const goToSlide = (index: number) => {
-      setCurrentIndex(index);
-   };
+   const { next, previous, goToSlide, currentIndex } = useSlider({
+      images,
+      autoPlay,
+   });
 
    if (!images || images.length === 0) {
       return (
@@ -94,7 +52,7 @@ export default function ImageSlider({
                         size={"clear"}
                         colors={"second"}
                         className=" p-1.5"
-                        onClick={goToPrevious}
+                        onClick={previous}
                         aria-label="Previous image"
                      >
                         <ChevronLeftIcon className="w-4" />
@@ -106,7 +64,7 @@ export default function ImageSlider({
                         size={"clear"}
                         colors={"second"}
                         className="p-1.5"
-                        onClick={goToNext}
+                        onClick={next}
                         aria-label="Next image"
                      >
                         <ChevronRightIcon className="w-4" />
