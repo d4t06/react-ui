@@ -45,10 +45,6 @@ export default function Tet() {
             />
          ))}
 
-
-
-
-         <textarea name="" id=""></textarea>
          <style>{`
          @keyframes fall {
            0% {

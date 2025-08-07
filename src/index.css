@@ -2,10 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/*default white theme*/
+:root {
+   --text-cl: #333;
+   --a-5-cl: rgba(0, 0, 0, 0.05);
+   --a-10-cl: rgba(0, 0, 0, 0.1);
+}
 
-button[disabled], .disabled {
-    pointer-events: none;
-    opacity: .6;
+.dark {
+   --text-cl: #fff;
+   --a-5-cl: rgba(255, 255, 255, 0.05);
+   --a-10-cl: rgba(255, 255, 255, 0.1);
+}
+
+button[disabled],
+.disabled {
+   pointer-events: none;
+   opacity: 0.6;
 }
 
 .mask {
@@ -20,13 +33,12 @@ button[disabled], .disabled {
    );
 }
 
-
 .no-scrollbar::-webkit-scrollbar {
    display: none;
- }
- 
- /* Hide scrollbar for IE, Edge and Firefox */
- .no-scrollbar {
-   -ms-overflow-style: none;  /* IE and Edge */
-   scrollbar-width: none;  /* Firefox */
- }
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+   -ms-overflow-style: none; /* IE and Edge */
+   scrollbar-width: none; /* Firefox */
+}

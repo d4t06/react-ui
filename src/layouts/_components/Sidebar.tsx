@@ -12,12 +12,12 @@ export default function DashBoardSidebar() {
 
    const classes = {
       container:
-         "bg-[#fff] border-r border-black/15 transition-[width] h-ful flex flex-col relative flex-shrink-0 w-[50px] sm:w-[70px]",
+         "bg-[#fff] dark:bg-slate-900 transition-[color,width] duration-[.3s] border-r h-screen border-black/15 h-ful flex flex-col relative flex-shrink-0 w-[50px] sm:w-[70px]",
       containerExpand: "!w-[180px]",
       head: "h-[60px] flex items-center justify-center",
       logoText: "text-[22px] font-[500] whitespace-nowrap tracking-[-1px]",
       logoImage: "max-w-[50px] p-[4px]",
-      item: "flex whitespace-nowrap space-x-[6px] items-center justify-center p-[10px] text-[#333] hover:text-[#cd1818] hover:bg-[#f8f8f8]",
+      item: "flex whitespace-nowrap space-x-[6px] items-center justify-center p-[10px] hover:text-[#cd1818] hover:bg-[#f8f8f8]",
       itemActive: "text-[#cd1818] bg-[#f1f1f1]",
       icon: "w-[24px] flex-shrink-0",
    };
@@ -36,8 +36,8 @@ export default function DashBoardSidebar() {
             )}
          </div>
 
-         <div className="overflow-auto h-full pb-10">
-            <div>
+         <div className="relative flex-grow overflow-hidden">
+            <div className="overflow-auto no-scrollbar h-full py-[40px]">
                <Link
                   to="/"
                   className={`${classes.item} ${expand ? "!justify-start" : ""}
@@ -59,6 +59,18 @@ export default function DashBoardSidebar() {
                      {expand && <span>{r.title}</span>}
                   </Link>
                ))}
+            </div>
+
+            <div className="absolute z-[9] h-[40px] top-0 left-0 right-0 bg-transparent">
+               <div className="relative h-full bg-transparent">
+                  <div className="backdrop-blur-[7px] z-[-1] absolute inset-0 bg-white/40 dark:bg-slate-900/40"></div>
+               </div>
+            </div>
+
+            <div className="absolute z-[9] h-[40px] bottom-0 left-0 right-0 bg-transparent">
+               <div className="relative h-full bg-transparent">
+                  <div className="backdrop-blur-[7px] z-[-1] absolute inset-0  bg-white/40 dark:bg-slate-900/40"></div>
+               </div>
             </div>
          </div>
 

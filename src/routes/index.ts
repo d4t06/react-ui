@@ -9,6 +9,7 @@ import AudioPlayer from "@/pages/audioPlayer";
 import Tet from "@/pages/tet";
 import GeneratePdfPage from "@/pages/generatePdf";
 import SliderPage from "@/pages/slider";
+import ChatInputPage from "@/pages/chat-input";
 
 const publicRoutes = [
    {
@@ -66,6 +67,11 @@ const publicRoutes = [
       path: "/slider",
       component: SliderPage,
       title: "Slider",
+   },
+      {
+      path: "/chat-input",
+      component: ChatInputPage,
+      title: "Chat Input",
    },
 ];
 
