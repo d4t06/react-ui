@@ -23,9 +23,9 @@ export default function DefaultLayout() {
 
    return (
       <>
-         <div className="flex fixed top-0 bottom-0 w-full text-[--text-cl]">
+         <div className="flex fixed inset-0 text-[--text-cl]">
             <DashBoardSidebar />
-            <div className="w-full dark:bg-slate-800 transition-color duration-[.3s] flex relative flex-col items-center justify-center">
+            <div className="w-full dark:bg-slate-800 transition-color duration-[.3s] flex relative flex-col space-y-5 items-center justify-center flex-grow">
                {/* <div className="absolute translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%]"> */}
                <Outlet />
                {/* </div> */}

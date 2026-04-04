@@ -21,18 +21,20 @@ export default function ChatInputPage() {
 	}, [value]);
 
 	return (
-		<div className={`rounded-lg ml-2 p-1.5 flex items-end bg-[--a-10-cl]`}>
-			<textarea
-				value={value}
-				ref={inputRef}
-				onChange={handleInputChange}
-				rows={(value.match(/\n/g) || []).length + 1}
-				className={`no-scrollbar resize-none outline-none max-h-[30vh] w-full !bg-transparent border-none`}
-			/>
+		<div className="border w-full flex-grow">
+			<div className={`rounded-lg ml-2 p-1.5 flex items-end bg-[--a-10-cl]`}>
+				<textarea
+					value={value}
+					ref={inputRef}
+					onChange={handleInputChange}
+					rows={(value.match(/\n/g) || []).length + 1}
+					className={`no-scrollbar resize-none outline-none max-h-[30vh] w-full !bg-transparent border-none`}
+				/>
 
-			<button>
-				<PlayIcon className="w-6" />
-			</button>
+				<button>
+					<PlayIcon className="w-6" />
+				</button>
+			</div>
 		</div>
 	);
 }

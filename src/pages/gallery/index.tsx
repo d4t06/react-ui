@@ -8,7 +8,7 @@ import Image from "./_components/MyImage";
 export default function Gallery() {
    const [openModal, setOpenModal] = useState(false);
 
-   const { imageUrl } = useReadCopiedImage();
+   const { imageUrl, handleInputChange } = useReadCopiedImage();
 
    const classes = {
       container: "w-[85vw] h-[80vh] flex flex-col",
@@ -25,10 +25,26 @@ export default function Gallery() {
       <>
          <input className="hidden" type="file" id="image-upload" />
 
-         {imageUrl && <Image className="w-[400px]" src={imageUrl} />}
+         {imageUrl && <Image className="w-[400px] rounded-md" src={imageUrl} />}
 
-         <p>Past image here</p>
+         <input
+            onPaste={handleInputChange}
+            type="text"
+            placeholder="Paste image here"
+            className="my-input "
+         />
 
+         <div className="relative">
+            <p className="bg-[--a-5-cl] py-1 px-3">Paste image here</p>
+            <div
+               onPaste={handleInputChange}
+               contentEditable
+               className="bg-transparent text-transparent absolute inset-0"
+            ></div>
+         </div>
+
+
+         <textarea name="" id="" className="my-input" />
          <Button onClick={() => setOpenModal(true)}>Open</Button>
 
          {openModal && (

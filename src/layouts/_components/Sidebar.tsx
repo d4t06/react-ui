@@ -12,7 +12,7 @@ export default function DashBoardSidebar() {
 
    const classes = {
       container:
-         "bg-[#fff] dark:bg-slate-900 transition-[color,width] duration-[.3s] border-r h-screen border-black/15 h-ful flex flex-col relative flex-shrink-0 w-[50px] sm:w-[70px]",
+         "bg-[#fff] dark:bg-slate-900 transition-[color,width] duration-[.3s] border-r  border-black/15 h-full flex flex-col relative flex-shrink-0 w-[50px] sm:w-[70px]",
       containerExpand: "!w-[180px]",
       head: "h-[60px] flex items-center justify-center",
       logoText: "text-[22px] font-[500] whitespace-nowrap tracking-[-1px]",

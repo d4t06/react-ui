@@ -1,20 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
    const [trigger, setTrigger] = useState(0);
 
+   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+   const handleTrigger = () => {
+      const inputEle = inputRef.current;
+
+      if (!inputEle) return;
+
+      const changeEvent = new Event("change");
+
+      inputEle.dispatchEvent(changeEvent);
+
+      inputEle.value = Math.random() + "";
+   };
+
+   const onChange = () => {
+      console.log("change");
+   };
+
    useEffect(() => {
-    //   if (1) return;
+      inputRef.current?.addEventListener("change", onChange);
 
       return () => {
-         console.log("clean up");
+         inputRef.current?.removeEventListener("change", onChange);
       };
-   }, [trigger]);
+   });
 
    return (
       <>
          <p className="text-center">This is home {trigger}</p>;
-         <button onClick={() => setTrigger(Math.random)}>change</button>
+         <button onClick={handleTrigger}>change</button>
+         <textarea onChange={() => {console.log('on change')}} ref={inputRef} type="text" />
       </>
    );
 }

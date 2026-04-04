@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { ClipboardEventHandler, useState } from "react";
 
 export default function useReadCopiedImage() {
    const [imageUrl, setImageUrl] = useState("");
 
-   const handleReadImage = async (e: ClipboardEvent) => {
+   const handleInputChange: ClipboardEventHandler = async (e) => {
       try {
          const fileLists = e.clipboardData?.files;
+         if (!fileLists.length) return;
 
-         if (!fileLists) return;
+         e.preventDefault();
 
          setImageUrl(URL.createObjectURL(fileLists[0]));
       } catch (error) {
@@ -15,13 +16,5 @@ export default function useReadCopiedImage() {
       }
    };
 
-   useEffect(() => {
-      window.addEventListener("paste", handleReadImage);
-
-      return () => {
-         window.removeEventListener("paste", handleReadImage);
-      };
-   }, []);
-
-   return { imageUrl };
+   return { imageUrl, handleInputChange };
 }

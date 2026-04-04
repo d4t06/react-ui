@@ -68,7 +68,22 @@ const publicRoutes = [
       component: SliderPage,
       title: "Slider",
    },
-      {
+   {
+      path: "/chat-input",
+      component: ChatInputPage,
+      title: "Chat Input",
+   },
+   {
+      path: "/chat-input",
+      component: ChatInputPage,
+      title: "Chat Input",
+   },
+   {
+      path: "/chat-input",
+      component: ChatInputPage,
+      title: "Chat Input",
+   },
+   {
       path: "/chat-input",
       component: ChatInputPage,
       title: "Chat Input",

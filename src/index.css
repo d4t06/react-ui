@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer components {
+  .my-input {
+    @apply p-1.5 px-3 bg-[#f1f1f1] dark:bg-slate-700 font-bold rounded-lg outline-none text-[#333] dark:text-white;
+  }
+}
+
+
 /*default white theme*/
 :root {
    --text-cl: #333;
