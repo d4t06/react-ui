@@ -10,6 +10,7 @@ import Tet from "@/pages/tet";
 import GeneratePdfPage from "@/pages/generatePdf";
 import SliderPage from "@/pages/slider";
 import ChatInputPage from "@/pages/chat-input";
+import VNTypingPage from "@/pages/vn-typing/page";
 
 const publicRoutes = [
    {
@@ -73,20 +74,11 @@ const publicRoutes = [
       component: ChatInputPage,
       title: "Chat Input",
    },
+
    {
-      path: "/chat-input",
-      component: ChatInputPage,
-      title: "Chat Input",
-   },
-   {
-      path: "/chat-input",
-      component: ChatInputPage,
-      title: "Chat Input",
-   },
-   {
-      path: "/chat-input",
-      component: ChatInputPage,
-      title: "Chat Input",
+      path: "/vn-typing",
+      component: VNTypingPage,
+      title: "VN Typing",
    },
 ];
 
